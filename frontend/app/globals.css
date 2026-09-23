@@ -1,0 +1,97 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f4f4f5;
+  color: #18181b;
+  font-family: Arial, sans-serif;
+}
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.form-section {
+  padding: 24px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
+}
+
+.actor-form {
+  display: grid;
+  gap: 16px;
+  max-width: 640px;
+}
+
+.actor-form label {
+  display: grid;
+  gap: 6px;
+  font-weight: 600;
+}
+
+.actor-form input,
+.actor-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d4d4d8;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.actor-form button {
+  width: fit-content;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #18181b;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+}
+
+.actor-form button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.form-success {
+  color: #166534;
+}
+
+.form-error {
+  color: #b91c1c;
+}
+
+.actor-list {
+  display: grid;
+  gap: 16px;
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+}
+
+.actor-card {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
+}
+
+.actor-photo {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.actor-card h2,
+.actor-card p {
+  margin: 0 0 8px;
+}
