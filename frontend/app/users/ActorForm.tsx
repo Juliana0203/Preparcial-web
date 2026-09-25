@@ -108,6 +108,7 @@ export default function ActorForm({
             name="name"
             value={name}
             onChange={(event) => setName(event.target.value)}
+            placeholder="Ej. Meryl Streep"
             required
           />
         </label>
@@ -130,6 +131,7 @@ export default function ActorForm({
             name="nationality"
             value={nationality}
             onChange={(event) => setNationality(event.target.value)}
+            placeholder="Ej. Estadounidense"
             required
           />
         </label>
@@ -151,6 +153,7 @@ export default function ActorForm({
             name="biography"
             value={biography}
             onChange={(event) => setBiography(event.target.value)}
+            placeholder="Describe brevemente la trayectoria del actor..."
             rows={4}
             required
           />
@@ -167,7 +170,7 @@ export default function ActorForm({
         )}
         </div>
 
-        {message && <p className="form-success">{message}</p>}
+        {message && <p className="form-success" role="status">✓ {message}</p>}
         {error && (
           <p className="form-error" role="alert">
             {error}

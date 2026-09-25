@@ -22,7 +22,7 @@ export default function ActorList() {
     editForm?.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
   }, [actorToEdit]);
 
-  if (isLoading) return <p>Cargando actores...</p>;
+  if (isLoading) return <p className="loading-message">🎬 Cargando actores...</p>;
   if (error) return <p role="alert">{error}</p>;
 
   const handleDelete = async (actor: Actor) => {
@@ -97,10 +97,10 @@ export default function ActorList() {
                 <p className="actor-nationality">{actor.nationality}</p>
                 <div className="card-actions">
                   <button className="button button-secondary" type="button" onClick={() => setActorToEdit(actor)}>
-                    Editar
+                    ✎ Editar
                   </button>
                   <button className="button button-danger" type="button" onClick={() => void handleDelete(actor)} disabled={deletingActorId === actor.id}>
-                    {deletingActorId === actor.id ? 'Eliminando...' : 'Eliminar'}
+                    {deletingActorId === actor.id ? 'Eliminando...' : '⌫ Eliminar'}
                   </button>
                 </div>
               </div>

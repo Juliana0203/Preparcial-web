@@ -42,6 +42,7 @@ h2 { margin-bottom: 6px; font-size: 1.35rem; }
 .actor-form { display: grid; gap: 19px; }
 .actor-form label { display: grid; gap: 8px; color: #30394d; font-size: .88rem; font-weight: 700; }
 .actor-form input, .actor-form textarea { width: 100%; padding: 12px 14px; border: 1px solid #d9deea; border-radius: 10px; outline: none; background: #fcfcfe; color: var(--ink); font: inherit; transition: border .2s, box-shadow .2s; }
+.actor-form input::placeholder, .actor-form textarea::placeholder { color: #9aa3b4; }
 .actor-form input:focus, .actor-form textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgb(99 91 255 / 14%); }
 .actor-form textarea { resize: vertical; }
 .form-success { color: #16805a; font-weight: 600; }
@@ -49,6 +50,8 @@ h2 { margin-bottom: 6px; font-size: 1.35rem; }
 .movie-creation-section { max-width: 900px; }
 .form-group { margin: 0; padding: 20px; border: 1px solid var(--line); border-radius: 14px; }
 .form-group legend { padding: 0 8px; color: var(--ink); font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; }
+.section-status { display: inline-block; margin-left: 8px; padding: 4px 8px; border-radius: 999px; background: #fff4e5; color: #a16207; font: 700 .68rem 'DM Sans', sans-serif; vertical-align: middle; }
+.section-status.complete { background: #e7f8ef; color: #16805a; }
 .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px; }
 .full-width { grid-column: 1 / -1; }
 .actor-form select { width: 100%; padding: 12px 14px; border: 1px solid #d9deea; border-radius: 10px; background: #fcfcfe; color: var(--ink); font: inherit; }
