@@ -4,6 +4,7 @@ import { useActors } from './ActorsContext';
 import { useState } from 'react';
 import { Actor } from './types';
 import ActorForm from '../users/ActorForm';
+import Link from 'next/link';
 
 export default function ActorList() {
   const { actors, isLoading, error, updateActor, deleteActor } = useActors();
@@ -36,8 +37,17 @@ export default function ActorList() {
   };
 
   return (
-    <section>
-      <h1>Actores</h1>
+    <section className="actors-section">
+      <header className="page-header">
+        <div>
+          <p className="eyebrow">Catálogo de talento</p>
+          <h1>Actores</h1>
+          <p className="page-description">Explora y administra los actores registrados en la plataforma.</p>
+        </div>
+        <Link className="button button-primary" href="/actors/create">
+          <span aria-hidden="true">+</span> Crear actor
+        </Link>
+      </header>
       {deleteError && (
         <p className="form-error" role="alert">
           {deleteError}
@@ -54,28 +64,35 @@ export default function ActorList() {
         />
       )}
       {actors.length === 0 ? (
-        <p>No hay actores registrados.</p>
+        <div className="empty-state">
+          <span className="empty-icon" aria-hidden="true">🎬</span>
+          <h2>Aún no hay actores</h2>
+          <p>Empieza creando el primer actor del catálogo.</p>
+          <Link className="button button-primary" href="/actors/create">Crear primer actor</Link>
+        </div>
       ) : (
-        <ul className="actor-list">
+        <ul className="actor-grid">
           {actors.map((actor) => (
             <li className="actor-card" key={actor.id}>
-              {actor.photo && (
-                <img src={actor.photo} alt={`Foto de ${actor.name}`} className="actor-photo" />
-              )}
-              <div>
+              <div className="actor-photo-wrapper">
+                {actor.photo ? (
+                  <img src={actor.photo} alt={`Foto de ${actor.name}`} className="actor-photo" />
+                ) : (
+                  <span className="actor-photo-placeholder" aria-hidden="true">🎭</span>
+                )}
+              </div>
+              <div className="actor-card-content">
                 <h2>{actor.name}</h2>
-                <p>{actor.nationality}</p>
-                <p>{actor.biography}</p>
-                <button type="button" onClick={() => setActorToEdit(actor)}>
-                  Editar
-                </button>
-                <button
-                  type="button"
-                  onClick={() => void handleDelete(actor)}
-                  disabled={deletingActorId === actor.id}
-                >
-                  {deletingActorId === actor.id ? 'Eliminando...' : 'Eliminar'}
-                </button>
+                <p className="actor-nationality">{actor.nationality}</p>
+                <p className="actor-bio">{actor.biography}</p>
+                <div className="card-actions">
+                  <button className="button button-secondary" type="button" onClick={() => setActorToEdit(actor)}>
+                    Editar
+                  </button>
+                  <button className="button button-danger" type="button" onClick={() => void handleDelete(actor)} disabled={deletingActorId === actor.id}>
+                    {deletingActorId === actor.id ? 'Eliminando...' : 'Eliminar'}
+                  </button>
+                </div>
               </div>
             </li>
           ))}

@@ -49,15 +49,15 @@ export default function ActorForm({
       const response = await fetch(
         actorToEdit ? `/api/v1/actors/${actorToEdit.id}` : '/api/v1/actors',
         {
-        method: actorToEdit ? 'PUT' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name,
-          photo,
-          nationality,
-          birthDate: birthday,
-          biography,
-        }),
+          method: actorToEdit ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: name.trim(),
+            photo: photo.trim(),
+            nationality: nationality.trim(),
+            birthDate: birthday,
+            biography: biography.trim(),
+          }),
         },
       );
 
@@ -92,7 +92,13 @@ export default function ActorForm({
 
   return (
     <section className="form-section">
-      <h1>{actorToEdit ? 'Editar actor' : 'Crear actor'}</h1>
+      <div className="form-heading">
+        <div>
+          <p className="eyebrow">{actorToEdit ? 'Actualizar información' : 'Nuevo registro'}</p>
+          <h1>{actorToEdit ? 'Editar actor' : 'Crear actor'}</h1>
+          <p className="page-description">Completa los datos para mantener el catálogo actualizado.</p>
+        </div>
+      </div>
       <form className="actor-form" onSubmit={handleSubmit}>
         <label>
           Nombre
@@ -105,7 +111,7 @@ export default function ActorForm({
         </label>
 
         <label>
-          Photo
+          Foto
           <input
             type="url"
             name="photo"
@@ -148,14 +154,16 @@ export default function ActorForm({
           />
         </label>
 
-        <button type="submit" disabled={isSubmitting}>
+        <div className="form-actions">
+        <button className="button button-primary" type="submit" disabled={isSubmitting}>
           {isSubmitting ? 'Guardando...' : actorToEdit ? 'Guardar cambios' : 'Guardar actor'}
         </button>
         {actorToEdit && onCancel && (
-          <button type="button" onClick={onCancel} disabled={isSubmitting}>
+          <button className="button button-secondary" type="button" onClick={onCancel} disabled={isSubmitting}>
             Cancelar
           </button>
         )}
+        </div>
 
         {message && <p className="form-success">{message}</p>}
         {error && (
