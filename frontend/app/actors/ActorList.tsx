@@ -95,7 +95,6 @@ export default function ActorList() {
               <div className="actor-card-content">
                 <h2>{actor.name}</h2>
                 <p className="actor-nationality">{actor.nationality}</p>
-                <p className="actor-bio">{actor.biography}</p>
                 <div className="card-actions">
                   <button className="button button-secondary" type="button" onClick={() => setActorToEdit(actor)}>
                     Editar
