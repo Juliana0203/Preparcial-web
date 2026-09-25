@@ -63,50 +63,54 @@ export default function CreateMoviePage() {
     setError(null);
 
     try {
-      const createdMovie = await createRecord<CreatedRecord>(
-        'movies',
-        {
-          title: movie.title.trim(),
-          poster: movie.poster.trim(),
-          duration: Number(movie.duration),
-          country: movie.country.trim(),
-          releaseDate: movie.releaseDate,
-          popularity: Number(movie.popularity),
-        },
-        'la película',
-      );
-      const createdActor = await createRecord<CreatedRecord>(
-        'actors',
-        {
-          name: actor.name.trim(),
-          photo: actor.photo.trim(),
-          nationality: actor.nationality.trim(),
-          birthDate: actor.birthDate,
-          biography: actor.biography.trim(),
-        },
-        'el actor',
-      );
-      const createdPrize = await createRecord<CreatedRecord>(
-        'prizes',
-        {
-          name: prize.name.trim(),
-          category: prize.category.trim(),
-          year: Number(prize.year),
-          status: prize.status,
-        },
-        'el premio',
-      );
+      const [createdMovie, createdActor, createdPrize] = await Promise.all([
+        createRecord<CreatedRecord>(
+          'movies',
+          {
+            title: movie.title.trim(),
+            poster: movie.poster.trim(),
+            duration: Number(movie.duration),
+            country: movie.country.trim(),
+            releaseDate: movie.releaseDate,
+            popularity: Number(movie.popularity),
+          },
+          'la película',
+        ),
+        createRecord<CreatedRecord>(
+          'actors',
+          {
+            name: actor.name.trim(),
+            photo: actor.photo.trim(),
+            nationality: actor.nationality.trim(),
+            birthDate: actor.birthDate,
+            biography: actor.biography.trim(),
+          },
+          'el actor',
+        ),
+        createRecord<CreatedRecord>(
+          'prizes',
+          {
+            name: prize.name.trim(),
+            category: prize.category.trim(),
+            year: Number(prize.year),
+            status: prize.status,
+          },
+          'el premio',
+        ),
+      ]);
 
-      await createRecord<CreatedRecord>(
-        `actors/${createdActor.id}/movies/${createdMovie.id}`,
-        {},
-        'la asociación del actor con la película',
-      );
-      await createRecord<CreatedRecord>(
-        `movies/${createdMovie.id}/prizes/${createdPrize.id}`,
-        {},
-        'la asociación del premio con la película',
-      );
+      await Promise.all([
+        createRecord<CreatedRecord>(
+          `actors/${createdActor.id}/movies/${createdMovie.id}`,
+          {},
+          'la asociación del actor con la película',
+        ),
+        createRecord<CreatedRecord>(
+          `movies/${createdMovie.id}/prizes/${createdPrize.id}`,
+          {},
+          'la asociación del premio con la película',
+        ),
+      ]);
 
       setMessage('Película, actor, premio y asociaciones creados correctamente.');
       setMovie({ title: '', poster: '', duration: '', country: '', releaseDate: '', popularity: '' });
