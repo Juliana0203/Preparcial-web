@@ -1,7 +1,7 @@
 'use client';
 
 import { useActors } from './ActorsContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Actor } from './types';
 import ActorForm from '../users/ActorForm';
 import Link from 'next/link';
@@ -11,6 +11,16 @@ export default function ActorList() {
   const [actorToEdit, setActorToEdit] = useState<Actor | undefined>();
   const [deletingActorId, setDeletingActorId] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!actorToEdit) {
+      return;
+    }
+
+    const editForm = document.getElementById('actor-edit-form');
+    editForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    editForm?.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
+  }, [actorToEdit]);
 
   if (isLoading) return <p>Cargando actores...</p>;
   if (error) return <p role="alert">{error}</p>;
@@ -55,6 +65,7 @@ export default function ActorList() {
       )}
       {actorToEdit && (
         <ActorForm
+          formId="actor-edit-form"
           actorToEdit={actorToEdit}
           onActorUpdated={(actor) => {
             updateActor(actor);

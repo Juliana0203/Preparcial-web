@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { Actor } from '../actors/types';
 
 type ActorFormProps = {
+  formId?: string;
   onActorCreated?: (actor: Actor) => void;
   onActorUpdated?: (actor: Actor) => void;
   actorToEdit?: Actor;
@@ -11,6 +12,7 @@ type ActorFormProps = {
 };
 
 export default function ActorForm({
+  formId,
   onActorCreated,
   onActorUpdated,
   actorToEdit,
@@ -91,7 +93,7 @@ export default function ActorForm({
   };
 
   return (
-    <section className="form-section">
+    <section id={formId} className="form-section">
       <div className="form-heading">
         <div>
           <p className="eyebrow">{actorToEdit ? 'Actualizar información' : 'Nuevo registro'}</p>
